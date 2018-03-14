@@ -1,3 +1,10 @@
 .RightBarContainer {
   text-align: center;
 }
+
+.UsersContainer {
+  position: absolute;
+  left: 85%;
+  height: 100%;
+  width: 15%;
+}

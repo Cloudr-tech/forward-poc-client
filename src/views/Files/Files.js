@@ -19,6 +19,7 @@ class Files extends Component {
   render() {
     return (
       <div className='FilesContainer'>
+        <div className='FilesHeader'></div>
         <h1 className='FilesTitle'>Files</h1>
         {this.state.files.map((file) => (
           <FileItem

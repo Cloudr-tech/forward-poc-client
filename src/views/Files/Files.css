@@ -3,6 +3,8 @@
   width: 63%;
   text-align: center;
   background: white;
+  position: absolute;
+  left: 22%;
 }
 
 .FilesTitle {
