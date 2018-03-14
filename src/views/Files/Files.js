@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import FileItem from '../../components/FileItem';
+import {
+  Table,
+  TableBody,
+} from 'material-ui/Table';
 import './Files.css';
 
 class Files extends Component {
@@ -12,14 +16,18 @@ class Files extends Component {
       <div className='FilesContainer'>
         <div className='FilesHeader'></div>
         <h1 className='FilesTitle'>Files</h1>
-        {this.props.files.map((file) => (
-          <FileItem
-            key={0}
-            id={0}
-            name={file}
-            size={4096}
-          />
-        ))}
+        <Table>
+          <TableBody>
+            {this.props.files.map((file) => (
+              <FileItem
+                key={0}
+                id={0}
+                name={file}
+                size={4096}
+                />
+            ))}
+          </TableBody>
+        </Table>
       </div>
     );
   }

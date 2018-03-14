@@ -1,7 +1,15 @@
 import React from 'react';
+import {
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 
 const FileItem = props => (
-  <div>{props.id} {props.name} {props.size}</div>
+  <TableRow>
+    <TableRowColumn>{props.id}</TableRowColumn>
+    <TableRowColumn>{props.name}</TableRowColumn>
+    <TableRowColumn>{props.size}</TableRowColumn>
+  </TableRow>
 );
 
 export default FileItem;

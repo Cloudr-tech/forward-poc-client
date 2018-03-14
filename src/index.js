@@ -3,6 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './views/Root';
 import registerServiceWorker from './registerServiceWorker';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const Root = () => (
+  <MuiThemeProvider>
+    <App />
+  </MuiThemeProvider>
+);
+
+
+ReactDOM.render(<Root />, document.getElementById('root'));
 registerServiceWorker();
