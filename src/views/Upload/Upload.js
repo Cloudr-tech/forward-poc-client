@@ -3,20 +3,15 @@ import './Upload.css';
 
 class Upload extends Component {
   onClickButton = () => {
-    const fileFirstPart = {
-
-    };
-
-    const fileSecondPart = {
-      name: `${this.file.name}.part2`
-    };
-
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(this.file);
-    reader.onload = (evt) => {
-      const arrayBuffer = reader.result;
-      console.log(arrayBuffer);
-    }
+    console.log(this.file);
+    this.props.upload(this.file.name);
+    // const reader = new FileReader();
+    // reader.readAsArrayBuffer(this.file);
+    // reader.onload = (evt) => {
+    //   const arrayBuffer = reader.result;
+    //   // const firstPart = arrayBuffer.slice(0, this.file.size / 2);
+    //   // const secondPart = arrayBuffer.slice(this.file.size / 2);
+    // }
   }
 
   readSliceOfFile = () => {

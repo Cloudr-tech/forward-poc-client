@@ -1,3 +1,3 @@
-import Upload from './Upload.js';
+import Upload from './UploadContainer.js';
 
 export default Upload;

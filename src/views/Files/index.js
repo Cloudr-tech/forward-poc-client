@@ -1,3 +1,3 @@
-import Files from './Files';
+import Files from './FilesContainer';
 
 export default Files;
