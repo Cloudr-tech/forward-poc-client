@@ -11,7 +11,7 @@ class App extends Component {
       <div className="App">
         <Sidebar />
         <Files />
-        <div>
+        <div className='UsersContainer'>
           <Users />
           <Upload />
         </div>

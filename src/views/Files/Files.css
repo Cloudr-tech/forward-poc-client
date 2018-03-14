@@ -1,0 +1,10 @@
+.FilesContainer {
+  min-height: 100%;
+  width: 63%;
+  text-align: center;
+  background: white;
+}
+
+.FilesTitle {
+  color: black;
+}

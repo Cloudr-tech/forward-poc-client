@@ -18,7 +18,7 @@ class Users extends Component {
 
   render() {
     return (
-      <div>
+      <div className='RightBarContainer'>
         <h1>Users</h1>
         {this.state.users.map((user) => (
           <UserItem

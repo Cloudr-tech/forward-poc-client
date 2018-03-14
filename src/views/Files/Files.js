@@ -18,8 +18,8 @@ class Files extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Files</h1>
+      <div className='FilesContainer'>
+        <h1 className='FilesTitle'>Files</h1>
         {this.state.files.map((file) => (
           <FileItem
             key={file.id}
