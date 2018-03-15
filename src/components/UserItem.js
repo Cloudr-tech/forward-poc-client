@@ -1,7 +1,13 @@
 import React from 'react';
 
 const UserItem = props => (
-  <div>{props.hostname} {props.ip} {props.size}</div>
+  <div>
+    <i className='fa fa-circle loginIcon'/>  
+    <div className='UserItem'>
+      <div>{props.hostname} - {props.size}</div>
+      <span>{props.ip}</span>
+    </div>
+  </div>
 );
 
 export default UserItem;
