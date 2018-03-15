@@ -4,7 +4,7 @@ import './Upload.css';
 class Upload extends Component {
   onClickButton = () => {
     console.log(this.file);
-    this.props.upload(this.file.name);
+    this.props.upload({ name: this.file.name, size: this.file.size, type: this.file.type });
     // const reader = new FileReader();
     // reader.readAsArrayBuffer(this.file);
     // reader.onload = (evt) => {

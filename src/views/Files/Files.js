@@ -27,11 +27,11 @@ class Files extends Component {
           <TableBody>
             {this.props.files.map((file) => (
               <FileItem
-                key={0}
-                id={0}
-                name={file}
-                size={4096}
-                />
+                key={file.name + file.size}
+                type={file.type}
+                name={file.name}
+                size={file.size}
+              />
             ))}
           </TableBody>
         </Table>

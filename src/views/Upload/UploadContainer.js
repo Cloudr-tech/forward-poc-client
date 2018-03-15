@@ -6,8 +6,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  upload: (name) => {
-    dispatch(uploadAction(name));
+  upload: (file) => {
+    dispatch(uploadAction(file));
   },
 });
 

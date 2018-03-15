@@ -9,7 +9,7 @@ const UploadReducer = (state = initialState, action) => {
     case UPLOAD_ACTION:
       return {
         ...state,
-        files: [...state.files, action.name],
+        files: [...state.files, action.file],
       };
     default:
       return state;

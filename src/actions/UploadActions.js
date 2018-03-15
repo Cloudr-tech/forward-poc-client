@@ -1,6 +1,7 @@
 export const UPLOAD_ACTION = 'UPLOAD_ACTION';
 
-export const uploadAction = name => ({
+// Update to send file info to the API
+export const uploadAction = file => ({
   type: UPLOAD_ACTION,
-  name,
+  file,
 });
