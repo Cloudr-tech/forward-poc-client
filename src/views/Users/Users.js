@@ -16,6 +16,10 @@ class Users extends Component {
     };
   }
 
+  componentDidMount = () => {
+    this.props.getUsers();
+  }
+
   render() {
     return (
       <div className='RightBarContainer'>

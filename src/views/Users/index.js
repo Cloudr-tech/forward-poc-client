@@ -1,3 +1,3 @@
-import Users from './Users.js';
+import Users from './UsersContainer.js';
 
 export default Users;
