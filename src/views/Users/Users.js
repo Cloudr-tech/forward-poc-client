@@ -19,7 +19,9 @@ class Users extends Component {
   render() {
     return (
       <div className='RightBarContainer'>
-        <h1>Users</h1>
+        <h1>Informations<br/>utilisateur</h1>
+        <hr className='UserDelim'/>
+        <div className='UsersConnected'>
         {this.state.users.map((user) => (
           <UserItem
             key={user.id}
@@ -28,6 +30,7 @@ class Users extends Component {
             size={user.sizeLeft}
           />
         ))}
+        </div>
       </div>
     );
   }

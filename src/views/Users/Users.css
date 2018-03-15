@@ -1,5 +1,6 @@
 .RightBarContainer {
   text-align: center;
+  color: white;
 }
 
 .UsersContainer {
@@ -7,4 +8,13 @@
   left: 85%;
   height: 100%;
   width: 15%;
+}
+
+.UserDelim {
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+.UsersConnected {
+  margin-bottom: 50px;
 }
