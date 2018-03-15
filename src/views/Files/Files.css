@@ -5,8 +5,20 @@
   background: white;
   position: absolute;
   left: 22%;
+  height: 100%;
+  overflow: auto;
 }
 
-.FilesTitle {
-  color: black;
+.FilesHeader {
+  color: rgb(28, 45, 48);
+  position: relative;
+  height: 90px;
+  width: 63%;
+  background: rgb(230, 230, 230);
+  position: fixed;
+}
+
+.FilesHeader > h3 {
+  vertical-align: center;
+  margin-top: 30px;
 }
