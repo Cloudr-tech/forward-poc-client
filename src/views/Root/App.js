@@ -4,7 +4,7 @@ import Files from '../Files';
 import Users from '../Users';
 import Upload from '../Upload';
 import Sidebar from '../Sidebar';
-import store from '../../config/store';
+import store from '../../helpers/store';
 import './App.css';
 
 class App extends Component {
