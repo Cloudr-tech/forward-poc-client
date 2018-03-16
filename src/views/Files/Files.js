@@ -17,6 +17,10 @@ const style = {
 }
 
 class Files extends Component {
+  componentDidMount = () => {
+    this.props.getFiles();
+  }
+
   render() {
     return (
       <div className='FilesContainer'>

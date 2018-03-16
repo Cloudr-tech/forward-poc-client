@@ -1,4 +1,4 @@
-import { UPLOAD_ACTION } from '../actions/UploadActions';
+import { UPLOAD_ACTION, GET_FILES_ACTION } from '../actions/UploadActions';
 
 const initialState = {
   files: [],
@@ -10,6 +10,11 @@ const UploadReducer = (state = initialState, action) => {
       return {
         ...state,
         files: [...state.files, action.file],
+      };
+    case GET_FILES_ACTION:
+      return {
+        ...state,
+        files: action.files,
       };
     default:
       return state;

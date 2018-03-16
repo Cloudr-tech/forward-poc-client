@@ -26,12 +26,12 @@ class Users extends Component {
         <h1>Informations<br/>utilisateur</h1>
         <hr className='UserDelim'/>
         <div className='UsersConnected'>
-        {this.state.users.map((user) => (
+        {this.props.users.map((user) => (
           <UserItem
-            key={user.id}
+            key={user._id}
             hostname={user.hostname}
             ip={user.ip}
-            size={user.sizeLeft}
+            size={user.storageLeft}
           />
         ))}
         </div>

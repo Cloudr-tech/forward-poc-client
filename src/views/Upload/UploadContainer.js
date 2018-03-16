@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { uploadAction } from '../../actions/UploadActions';
+import { uploadFileAction } from '../../actions/UploadActions';
 import Upload from './Upload';
 
 const mapStateToProps = state => ({
@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   upload: (file) => {
-    dispatch(uploadAction(file));
+    dispatch(uploadFileAction(file));
   },
 });
 

@@ -1,5 +1,5 @@
 export default {
   api: {
-    url: 'http://localhost:8080',
+    url: 'https://cloudr-api.marmus.me',
   },
 };

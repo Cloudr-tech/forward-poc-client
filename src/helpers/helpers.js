@@ -31,7 +31,7 @@ const getIconType = fileType => {
   ];
 
   for (const array in iconArray) {
-    if (fileType === iconArray[array][0]) {
+    if (fileType.includes(iconArray[array][0])) {
       return iconArray[array][1];
     }
   }
