@@ -1,5 +1,35 @@
 import React, { Component } from 'react';
 import './Upload.css';
+import RaisedButton from 'material-ui/RaisedButton'
+
+const styles = {
+  uploadBtn: {
+    width: '45%',
+    heigth: 20,
+    padding: 0,
+    margin: '1%',
+    float: 'right',
+    background: 'rgba(0, 0, 0, 0)',
+    overflow: 'hidden',
+  },
+  exampleImageInput: {
+    cursor: 'pointer',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    width: '45%',
+    display: 'none',
+  },
+  chooseBtn: {
+    width: '45%',
+    heigth: 20,
+    padding: 0,
+    margin: '1%',
+    float: 'left',
+  },
+}
 
 class Upload extends Component {
   onClickButton = () => {
@@ -24,17 +54,30 @@ class Upload extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <label htmlFor="file">Sélectionner le fichier à envoyer</label><br />
-          <input
-            onChange={(e) => { this.handleFileChange(e.target.files) }}
-            type="file"
-            id="file"
-            name="file"
-          />
-        </div>
-        <button onClick={this.onClickButton}>Upload</button>
+      <div className='UploadBtnContainer'>
+        <RaisedButton
+          label="Choose file"
+          labelPosition="before"
+          containerElement="label"
+          primary={true}
+          labelStyle={{ fontSize: '10px', padding: 0, overflow: 'hidden'}}
+          style={styles.chooseBtn}
+        >
+         <input 
+          type="file"
+          style={styles.exampleImageInput}
+          onChange={(e) => {this.handleFileChange(e.target.files);}}  
+        />
+        </RaisedButton>
+        <RaisedButton
+          style={styles.uploadBtn}
+          label="Upload"
+          labelStyle={{ fontSize: '10px', padding: 0, overflow: 'hidden'}}
+          primary={true}
+          labelPosition="before"
+          containerElement="label"
+          onClick={this.onClickButton}
+        />
       </div>
     );
   }
