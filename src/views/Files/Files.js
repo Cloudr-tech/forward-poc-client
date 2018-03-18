@@ -31,7 +31,7 @@ class Files extends Component {
           <TableBody>
             {this.props.files.map((file) => (
               <FileItem
-                key={file.name + file.size}
+                key={file._id}
                 type={file.type}
                 name={file.name}
                 size={file.size}

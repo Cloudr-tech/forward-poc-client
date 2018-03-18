@@ -32,8 +32,8 @@ class Storage extends Component {
   }
 
   getPercentUsage = () => {
-    console.log(Math.round(this.state.totalUsedStorage / this.state.totalAvailableStorage) * 100);
-    return Math.round((this.state.totalUsedStorage / this.state.totalAvailableStorage) * 100);
+    const percent = Math.round(this.state.totalUsedStorage / this.state.totalAvailableStorage) * 100;
+    return 40;
   }
 
   componentWillUpdate = (nextProps) => {
@@ -45,10 +45,10 @@ class Storage extends Component {
     return (
       <div>
         <div className='storageContainer'>
-        <hr style={{margin: '40px auto 40px auto',}}/>                            
+        <hr style={{margin: '40px auto 40px auto',}}/>
           Espace utilisé {fileConvertSize(this.state.totalUsedStorage)} / {fileConvertSize(this.state.totalAvailableStorage)}<br/>
           <div className='totalSpace'>
-            <div style={{width: this.getPercentUsage(), background: 'white', height: '100%', maxWidth: '100%', borderRadius: 5}}/>
+            <div style={{ width: this.getPercentUsage(), background: '#43b581', height: '100%', maxWidth: '100%', borderRadius: 5}}/>
           </div>
         </div>
       </div>

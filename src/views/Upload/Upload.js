@@ -34,18 +34,35 @@ const styles = {
 class Upload extends Component {
   onClickButton = () => {
     console.log(this.file);
-    this.props.upload({ name: this.file.name, size: this.file.size, type: this.file.type });
-    // const reader = new FileReader();
-    // reader.readAsArrayBuffer(this.file);
-    // reader.onload = (evt) => {
-    //   const arrayBuffer = reader.result;
-    //   // const firstPart = arrayBuffer.slice(0, this.file.size / 2);
-    //   // const secondPart = arrayBuffer.slice(this.file.size / 2);
-    // }
+    this.sendFileToSocket(this.file);
   }
 
-  readSliceOfFile = () => {
+  sleep = ms => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
+  sendFileToSocket = (file) => {
+    // const ws = new WebSocket('ws://10.26.111.215:4242');
+    // const fileReader = new FileReader();
+    // ws.onopen = () => {
+    //   fileReader.readAsArrayBuffer(file);
+    //   fileReader.onload = async (evt) => {
+    //     const dataBuffer = new Int8Array(fileReader.result);
+    //     const send = [];
+    //     let totalLength = 0;
+    //     for (let to in dataBuffer) {
+    //       send.push(dataBuffer[to]);
+    //       if (send.length >= 16000) {
+    //         ws.send(JSON.stringify({ type: "upload", name: file.name, data: send }));
+    //         send.length = 0;
+    //         totalLength += 16000;
+    //         console.log(`Sending ${totalLength / file.size * 100} %`)
+    //         await this.sleep(10);
+    //       }
+    //     }
+        this.props.upload({ name: this.file.name, size: this.file.size, type: this.file.type });
+    //   }
+    // }
   }
 
   handleFileChange(files) {
@@ -63,10 +80,10 @@ class Upload extends Component {
           labelStyle={{ fontSize: '10px', padding: 0, overflow: 'hidden'}}
           style={styles.chooseBtn}
         >
-         <input 
+         <input
           type="file"
           style={styles.exampleImageInput}
-          onChange={(e) => {this.handleFileChange(e.target.files);}}  
+          onChange={(e) => {this.handleFileChange(e.target.files);}}
         />
         </RaisedButton>
         <RaisedButton
