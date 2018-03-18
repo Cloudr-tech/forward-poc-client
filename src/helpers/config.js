@@ -1,5 +1,5 @@
 export default {
   api: {
-    url: 'https://cloudr-api.marmus.me',
+    url: 'http://api.cloudr.tech',
   },
 };
