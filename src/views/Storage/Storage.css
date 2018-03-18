@@ -1,0 +1,10 @@
+.storageContainer {
+  color: white;
+}
+
+.totalSpace {
+  width: 95%;
+  height: 30px;
+  background: rgb(166, 166, 166);
+  margin: auto;
+}

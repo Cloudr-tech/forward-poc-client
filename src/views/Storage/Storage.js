@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { fileConvertSize } from '../../helpers/helpers';
+import './Storage.css';
 
 class Storage extends Component {
   constructor(props) {
@@ -42,8 +43,11 @@ class Storage extends Component {
 
   render() {
     return (
-      <div>
-        Espace utilisé {fileConvertSize(this.state.totalUsedStorage)} / {fileConvertSize(this.state.totalAvailableStorage)}
+      <div className='storageContainer'>
+        Espace utilisé {fileConvertSize(this.state.totalUsedStorage)} / {fileConvertSize(this.state.totalAvailableStorage)}<br/>
+        <div className='totalSpace'>
+          <div style={{width: this.getPercentUsage(), background: 'white', height: '100%'}}/>
+        </div>
       </div>
     );
   }
