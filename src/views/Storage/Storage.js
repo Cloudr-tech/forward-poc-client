@@ -43,10 +43,13 @@ class Storage extends Component {
 
   render() {
     return (
-      <div className='storageContainer'>
-        Espace utilisé {fileConvertSize(this.state.totalUsedStorage)} / {fileConvertSize(this.state.totalAvailableStorage)}<br/>
-        <div className='totalSpace'>
-          <div style={{width: this.getPercentUsage(), background: 'white', height: '100%'}}/>
+      <div>
+        <div className='storageContainer'>
+        <hr style={{margin: '40px auto 40px auto',}}/>                            
+          Espace utilisé {fileConvertSize(this.state.totalUsedStorage)} / {fileConvertSize(this.state.totalAvailableStorage)}<br/>
+          <div className='totalSpace'>
+            <div style={{width: this.getPercentUsage(), background: 'white', height: '100%', maxWidth: '100%', borderRadius: 5}}/>
+          </div>
         </div>
       </div>
     );

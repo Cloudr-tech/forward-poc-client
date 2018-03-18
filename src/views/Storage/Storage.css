@@ -1,5 +1,10 @@
 .storageContainer {
   color: white;
+  position: absolute;
+  width: 100%;
+  bottom: 50px;
+  font-size: 14px;
+  text-align: center;
 }
 
 .totalSpace {
@@ -7,4 +12,5 @@
   height: 30px;
   background: rgb(166, 166, 166);
   margin: auto;
+  border-radius: 5px;  
 }
