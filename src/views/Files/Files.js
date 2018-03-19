@@ -18,7 +18,9 @@ const style = {
 
 class Files extends Component {
   componentDidMount = () => {
-    this.props.getFiles();
+    setInterval(() => {
+      this.props.getFiles();
+    }, 1000);
   }
 
   render() {

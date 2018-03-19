@@ -4,7 +4,9 @@ import './Users.css';
 
 class Users extends Component {
   componentDidMount = () => {
-    this.props.getUsers();
+    setInterval(() => {
+      this.props.getUsers()
+    }, 1000);
   }
 
   render() {
