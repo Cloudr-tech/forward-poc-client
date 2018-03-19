@@ -17,9 +17,9 @@
   font-size: 60px;
 }
 
-.SideBarIcon {
-  color: white;
-  font-size: 100px !important;
+.SideBarLogo {
+  width: 105px;
+  height: 75px;
 }
 
 hr {

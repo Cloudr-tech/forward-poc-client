@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Sidebar.css';
+import logo from '../../assets/logo.png';
 import 'font-awesome/css/font-awesome.min.css';
 
 class Sidebar extends Component {
@@ -7,7 +8,7 @@ class Sidebar extends Component {
     return (
       <div className="SidebarContainer">
         <div className='SidebarHeader'>
-          <i className='fa fa-cloud SideBarIcon'></i>
+          <img src={logo} className='SideBarLogo' />
           <h1 className="SidebarTitle">CloudR</h1>
           <h4 className='SidebarSlogan'>Soyez votre propre hébergeur!</h4>
           <hr />
@@ -28,4 +29,3 @@ class Sidebar extends Component {
 }
 
 export default Sidebar;
-
