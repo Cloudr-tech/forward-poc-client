@@ -13,9 +13,9 @@
   color: rgb(28, 45, 48);
   position: relative;
   height: 90px;
-  width: 63%;
+  width: 100%;
   background: rgb(230, 230, 230);
-  position: fixed;
+  position: absolute;
 }
 
 .FilesHeader > h3 {

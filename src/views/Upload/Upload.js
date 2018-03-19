@@ -34,7 +34,9 @@ const styles = {
 class Upload extends Component {
   onClickButton = () => {
     console.log(this.file);
-    this.sendFileToSocket(this.file);
+    if (this.file != null) {
+      this.sendFileToSocket(this.file);
+    }
   }
 
   sleep = ms => {
