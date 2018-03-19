@@ -10,6 +10,7 @@ const styles = {
     margin: '1%',
     float: 'right',
     background: 'rgba(0, 0, 0, 0)',
+    color: 'white',
     overflow: 'hidden',
   },
   exampleImageInput: {
@@ -20,6 +21,7 @@ const styles = {
     right: 0,
     left: 0,
     width: '45%',
+    color: 'white',
     display: 'none',
   },
   chooseBtn: {
@@ -27,6 +29,7 @@ const styles = {
     heigth: 20,
     padding: 0,
     margin: '1%',
+    color: 'white',
     float: 'left',
   },
 }
@@ -75,11 +78,11 @@ class Upload extends Component {
     return (
       <div className='UploadBtnContainer'>
         <RaisedButton
+          backgroundColor="#fff"
           label="Choose file"
           labelPosition="before"
           containerElement="label"
-          primary={true}
-          labelStyle={{ fontSize: '10px', padding: 0, overflow: 'hidden'}}
+          labelStyle={{ fontSize: '10px', padding: 0, overflow: 'hidden', color: '#16d267', fontWeight: 'bold'}}
           style={styles.chooseBtn}
         >
          <input
@@ -89,10 +92,10 @@ class Upload extends Component {
         />
         </RaisedButton>
         <RaisedButton
+          backgroundColor="#fff"
           style={styles.uploadBtn}
           label="Upload"
-          labelStyle={{ fontSize: '10px', padding: 0, overflow: 'hidden'}}
-          primary={true}
+          labelStyle={{ fontSize: '10px', padding: 0, overflow: 'hidden', color: '#16d267', fontWeight: 'bold'}}
           labelPosition="before"
           containerElement="label"
           onClick={this.onClickButton}

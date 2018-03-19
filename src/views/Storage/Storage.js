@@ -48,7 +48,7 @@ class Storage extends Component {
         <hr style={{margin: '40px auto 40px auto',}}/>
           Espace utilisé {fileConvertSize(this.state.totalUsedStorage)} / {fileConvertSize(this.state.totalAvailableStorage)}<br/>
           <div className='totalSpace'>
-            <div style={{ width: this.getPercentUsage(), background: '#5cb85c', height: '100%', maxWidth: '100%', borderRadius: 5}}/>
+            <div style={{ width: this.getPercentUsage(), background: '#16d267', height: '100%', maxWidth: '100%', borderRadius: 5}}/>
           </div>
         </div>
       </div>
