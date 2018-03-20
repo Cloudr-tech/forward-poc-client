@@ -3,6 +3,7 @@ FROM node
 WORKDIR /app
 COPY . /app
 RUN npm install
-RUN npm install serve -g
-CMD serve -p 80
-EXPOSE 80
+RUN npm install -g serve
+RUN npm run build --production
+CMD serve -s build
+EXPOSE 5000
