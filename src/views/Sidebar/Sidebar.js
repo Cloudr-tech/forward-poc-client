@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Sidebar.css';
-import logo from '../../assets/logo.png';
+import ReactVivus from 'react-vivus';
+import logo from '../../assets/logo.svg';
 import 'font-awesome/css/font-awesome.min.css';
 
 class Sidebar extends Component {
@@ -8,7 +9,28 @@ class Sidebar extends Component {
     return (
       <div className="SidebarContainer">
         <div className='SidebarHeader'>
-          <img src={logo} className='SideBarLogo' />
+          <div className='SideBarLogo'>
+            <ReactVivus
+              id="foo"
+              option={{
+                file: logo,
+                animTimingFunction: 'EASE',
+                pathTimingFunction: 'EASE_OUT_BOUNCE',
+                type: 'sync',
+                duration: 200,
+              }}
+              callback={(myVivus) => {
+                if (myVivus.getStatus() === 'end') {
+                  setTimeout(() => {
+                    console.log('ok');
+                    myVivus.play(-1);
+                  }, 5000);
+                } else {
+                  myVivus.play(1);
+                }
+              }}
+            />
+          </div>
           <h1 className="SidebarTitle">CloudR</h1>
           <h4 className='SidebarSlogan'>Soyez votre propre hébergeur!</h4>
           <hr />

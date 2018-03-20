@@ -18,8 +18,11 @@
 }
 
 .SideBarLogo {
-  width: 105px;
-  height: 75px;
+  display: block;
+  margin: auto;
+  width: 200px;
+  height: 200px;
+  margin-bottom: 30px;
 }
 
 hr {
