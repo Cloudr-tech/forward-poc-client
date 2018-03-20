@@ -9,9 +9,8 @@
 
 .totalSpace {
   width: 95%;
-  height: 30px;
+  height: 5px;
   background: white;
-  margin: auto;
+  margin-top: 10px;
   border-radius: 8px;
-  border: 2px solid rgb(166, 166, 166);
 }
