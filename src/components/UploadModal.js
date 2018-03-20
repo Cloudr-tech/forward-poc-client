@@ -1,6 +1,5 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 
 const style = {
   width: '95%',
@@ -14,8 +13,7 @@ const UploadModal = props => (
   <Dialog
     open={props.open}
   >
-    Upload en cours
-    {props.test1} / {props.test2}
+    {props.string}
     <div style={style}>
       <div style={{ width: props.current, background: '#5cb85c', height: '100%', maxWidth: '100%', borderRadius: 5}}/>
     </div>

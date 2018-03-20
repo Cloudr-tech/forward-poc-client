@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import './Upload.css';
-import RaisedButton from 'material-ui/RaisedButton'
+import RaisedButton from 'material-ui/RaisedButton';
+import UploadModal from '../../components/UploadModal';
 
 const styles = {
   uploadBtn: {
@@ -35,6 +37,16 @@ const styles = {
 }
 
 class Upload extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isUploading: false,
+      current: 0,
+      total: 0,
+      string: "",
+    };
+  }
+
   onClickButton = () => {
     console.log(this.file);
     if (this.file != null) {
@@ -42,41 +54,74 @@ class Upload extends Component {
     }
   }
 
-  sleep = ms => {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  sendFilesToDaemons = (file, name) => {
+    return new Promise((resolve, reject) => {
+      for (let id in this.props.daemons) {
+        const daemon = this.props.daemons[id];
+        console.log(daemon);
+        if ((new Date() / 1000 - daemon.timeStamp) > 10) {
+          continue;
+        }
+
+        console.log(`upload to ${daemon.hostname}`);
+        this.setState({ string: `Envoi du fichier ${file} à ${daemon.hostname}`, current: 0, total: 0 });
+        Axios(`http://${daemon.ip}:4242/upload`, {
+          method: 'POST',
+          data: {
+            name: name,
+            dataBuffer: file,
+          },
+          onUploadProgress: (progressEvent) => {
+            const { loaded, total } = progressEvent;
+            this.setState({ current: loaded, total });
+          },
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      }
+      resolve(true);
+    });
   }
 
   sendFileToSocket = (file) => {
-    // const ws = new WebSocket('ws://10.26.111.215:4242');
-    // const fileReader = new FileReader();
-    // ws.onopen = () => {
-    //   fileReader.readAsArrayBuffer(file);
-    //   fileReader.onload = async (evt) => {
-    //     const dataBuffer = new Int8Array(fileReader.result);
-    //     const send = [];
-    //     let totalLength = 0;
-    //     for (let to in dataBuffer) {
-    //       send.push(dataBuffer[to]);
-    //       if (send.length >= 16000) {
-    //         ws.send(JSON.stringify({ type: "upload", name: file.name, data: send }));
-    //         send.length = 0;
-    //         totalLength += 16000;
-    //         console.log(`Sending ${totalLength / file.size * 100} %`)
-    //         await this.sleep(10);
-    //       }
-    //     }
-        this.props.upload({ name: this.file.name, size: this.file.size, type: this.file.type });
-    //   }
-    // }
+    this.setState({ isUploading: true, string: "Lecture du fichier" });
+    const fileReader = new FileReader();
+    fileReader.readAsArrayBuffer(file);
+    fileReader.onload = (evt) => {
+      const dataBuffer = new Int8Array(fileReader.result);
+      const send = [];
+      this.setState({ string: "Création et séparation du fichier", total: dataBuffer.length });
+      for (let to in dataBuffer) {
+        send.push(dataBuffer[to]);
+        this.setState({ current: to });
+      }
+
+      const sendToOne = send.slice(0, this.file.size / 2);
+      const sendToTwo = send.slice(this.file.size / 2);
+
+      this.sendFilesToDaemons(sendToOne, `${this.file.name}.part1`)
+      .then(_ => {
+        return this.sendFilesToDaemons(sendToTwo, `${this.file.name}.part2`);
+      })
+      .then(_ => {
+        this.setState({ isUploading: false, current: 0, total: 0 });
+      });
+    }
   }
 
-  handleFileChange(files) {
+  handleFileChange = (files) => {
     this.file = files[0];
   }
 
   render() {
     return (
       <div className='UploadBtnContainer'>
+        <UploadModal
+          open={this.state.isUploading}
+          current={(this.state.current / this.state.total) * 100 || 0}
+          string={this.state.string}
+        />
         <RaisedButton
           backgroundColor="#fff"
           label="Choose file"

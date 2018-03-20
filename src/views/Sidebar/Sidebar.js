@@ -22,7 +22,6 @@ class Sidebar extends Component {
               callback={(myVivus) => {
                 if (myVivus.getStatus() === 'end') {
                   setTimeout(() => {
-                    console.log('ok');
                     myVivus.play(-1);
                   }, 5000);
                 } else {
