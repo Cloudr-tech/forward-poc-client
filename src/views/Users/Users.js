@@ -21,6 +21,7 @@ class Users extends Component {
             hostname={user.hostname}
             ip={user.ip}
             size={user.storageLeft}
+            timestamp={user.timeStamp}
           />
         ))}
         </div>
