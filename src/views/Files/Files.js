@@ -28,7 +28,7 @@ class Files extends Component {
     let fileArray = [];
 
     for (let user in this.props.users) {
-      if (file.partOne.includes(this.props.users[user]._id)) {
+      if (file.partOne.includes(this.props.users[user]._id) && ((new Date() / 1000) - this.props.users[user].timeStamp) < 10) {
         const res = await Axios(`http://${this.props.users[user].ip}:4242/download/${file.uid}.part1`);
         fileArray = res.data.data;
         console.log(fileArray);
@@ -36,9 +36,10 @@ class Files extends Component {
     }
 
     for (let user in this.props.users) {
-      if (file.partTwo.includes(this.props.users[user]._id)) {
+      if (file.partTwo.includes(this.props.users[user]._id) && ((new Date() / 1000) - this.props.users[user].timeStamp) < 10) {
         const res = await Axios(`http://${this.props.users[user].ip}:4242/download/${file.uid}.part2`);
         fileArray = fileArray.concat(res.data.data);
+        console.log(fileArray);
       }
     }
 

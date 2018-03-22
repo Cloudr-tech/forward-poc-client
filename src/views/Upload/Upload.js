@@ -55,31 +55,21 @@ class Upload extends Component {
     }
   }
 
-  sendFilesToDaemons = (file, name) => {
+  sendFilesToDaemons = (file, daemon, name) => {
     return new Promise(async (resolve, reject) => {
-      const idSend = [];
-
-      for (let id in this.props.daemons) {
-        const daemon = this.props.daemons[id];
-        if ((new Date() / 1000 - daemon.timeStamp) > 10) {
-          continue;
-        }
-
-        this.setState({ string: `Envoi du fichier ${name} à ${daemon.hostname}`, current: 0, total: 0 });
-        await Axios(`http://${daemon.ip}:4242/upload`, {
-          method: 'POST',
-          data: {
-            name: name,
-            dataBuffer: file,
-          },
-          onUploadProgress: (progressEvent) => {
-            const { loaded, total } = progressEvent;
-            this.setState({ current: loaded, total });
-          },
-        });
-        idSend.push(daemon._id);
-      }
-      resolve(idSend);
+      this.setState({ string: `Envoi du fichier ${name} à ${daemon.hostname}`, current: 0, total: 0 });
+      await Axios(`http://${daemon.ip}:4242/upload`, {
+        method: 'POST',
+        data: {
+          name: name,
+          dataBuffer: file,
+        },
+        onUploadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          this.setState({ current: loaded, total });
+        },
+      });
+      resolve(true);
     });
   }
 
@@ -90,6 +80,10 @@ class Upload extends Component {
     fileReader.onload = async (evt) => {
       const dataBuffer = new Int8Array(fileReader.result);
       const dataArraySend = [];
+      const partOneDaemonOne = this.props.daemons[0];
+      const partOneDaemonTwo = this.props.daemons[1];
+      const partTwoDaemonOne = this.props.daemons[2];
+      const partTwoDaemonTwo = this.props.daemons[3];
 
       this.setState({ string: "Création et séparation du fichier" });
       for (let to in dataBuffer) {
@@ -99,10 +93,14 @@ class Upload extends Component {
       const sendToOne = dataArraySend.slice(0, this.file.size / 2);
       const sendToTwo = dataArraySend.slice(this.file.size / 2);
       const fileSlug = uuidv4();
-      const idArrayPart1 = await this.sendFilesToDaemons(sendToOne, `${fileSlug}.part1`);
-      console.log(idArrayPart1);
-      const idArrayPart2 = await this.sendFilesToDaemons(sendToTwo, `${fileSlug}.part2`);
-      console.log(idArrayPart2);
+      await this.sendFilesToDaemons(sendToOne, partOneDaemonOne, `${fileSlug}.part1`);
+      await this.sendFilesToDaemons(sendToOne, partOneDaemonTwo, `${fileSlug}.part1`);
+      await this.sendFilesToDaemons(sendToTwo, partTwoDaemonOne, `${fileSlug}.part2`);
+      await this.sendFilesToDaemons(sendToTwo, partTwoDaemonTwo, `${fileSlug}.part2`);
+
+      const idArrayPart1 = [this.props.daemons[0]._id, this.props.daemons[1]._id];
+      const idArrayPart2 = [this.props.daemons[2]._id, this.props.daemons[3]._id];
+
       this.props.upload({
         name: this.file.name,
         size: this.file.size,
