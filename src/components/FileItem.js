@@ -28,9 +28,9 @@ const style = {
 
 const FileItem = props => (
   <TableRow>
-    <TableRowColumn style={style.firstColumn}><i className={`fa ${getIconType(props.type)}`} /></TableRowColumn>
-    <TableRowColumn style={style.secondColumn}>{props.name}</TableRowColumn>
-    <TableRowColumn style={style.rightColumn}>{fileConvertSize(props.size)} <i className='fa fa-download' /></TableRowColumn>
+    <TableRowColumn style={style.firstColumn}><i className={`fa ${getIconType(props.file.type)}`} /></TableRowColumn>
+    <TableRowColumn style={style.secondColumn}>{props.file.name}</TableRowColumn>
+    <TableRowColumn style={style.rightColumn}>{fileConvertSize(props.file.size)} <i className='fa fa-download' onClick={() => { props.onDownload(props.file) }} /></TableRowColumn>
   </TableRow>
 );
 

@@ -4,6 +4,7 @@ import Files from './Files';
 
 const mapStateToProps = state => ({
   files: state.upload.files,
+  users: state.users.users,
 });
 
 const mapDispatchToProps = dispatch => ({

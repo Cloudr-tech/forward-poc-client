@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import uuidv4 from 'uuid/v4';
 import './Upload.css';
 import RaisedButton from 'material-ui/RaisedButton';
 import UploadModal from '../../components/UploadModal';
@@ -55,17 +56,17 @@ class Upload extends Component {
   }
 
   sendFilesToDaemons = (file, name) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
+      const idSend = [];
+
       for (let id in this.props.daemons) {
         const daemon = this.props.daemons[id];
-        console.log(daemon);
         if ((new Date() / 1000 - daemon.timeStamp) > 10) {
           continue;
         }
 
-        console.log(`upload to ${daemon.hostname}`);
-        this.setState({ string: `Envoi du fichier ${file} à ${daemon.hostname}`, current: 0, total: 0 });
-        Axios(`http://${daemon.ip}:4242/upload`, {
+        this.setState({ string: `Envoi du fichier ${name} à ${daemon.hostname}`, current: 0, total: 0 });
+        await Axios(`http://${daemon.ip}:4242/upload`, {
           method: 'POST',
           data: {
             name: name,
@@ -75,12 +76,10 @@ class Upload extends Component {
             const { loaded, total } = progressEvent;
             this.setState({ current: loaded, total });
           },
-        })
-        .catch(err => {
-          console.log(err);
         });
+        idSend.push(daemon._id);
       }
-      resolve(true);
+      resolve(idSend);
     });
   }
 
@@ -88,25 +87,31 @@ class Upload extends Component {
     this.setState({ isUploading: true, string: "Lecture du fichier" });
     const fileReader = new FileReader();
     fileReader.readAsArrayBuffer(file);
-    fileReader.onload = (evt) => {
+    fileReader.onload = async (evt) => {
       const dataBuffer = new Int8Array(fileReader.result);
-      const send = [];
-      this.setState({ string: "Création et séparation du fichier", total: dataBuffer.length });
+      const dataArraySend = [];
+
+      this.setState({ string: "Création et séparation du fichier" });
       for (let to in dataBuffer) {
-        send.push(dataBuffer[to]);
-        this.setState({ current: to });
+        dataArraySend.push(dataBuffer[to]);
       }
 
-      const sendToOne = send.slice(0, this.file.size / 2);
-      const sendToTwo = send.slice(this.file.size / 2);
-
-      this.sendFilesToDaemons(sendToOne, `${this.file.name}.part1`)
-      .then(_ => {
-        return this.sendFilesToDaemons(sendToTwo, `${this.file.name}.part2`);
-      })
-      .then(_ => {
-        this.setState({ isUploading: false, current: 0, total: 0 });
+      const sendToOne = dataArraySend.slice(0, this.file.size / 2);
+      const sendToTwo = dataArraySend.slice(this.file.size / 2);
+      const fileSlug = uuidv4();
+      const idArrayPart1 = await this.sendFilesToDaemons(sendToOne, `${fileSlug}.part1`);
+      console.log(idArrayPart1);
+      const idArrayPart2 = await this.sendFilesToDaemons(sendToTwo, `${fileSlug}.part2`);
+      console.log(idArrayPart2);
+      this.props.upload({
+        name: this.file.name,
+        size: this.file.size,
+        type: this.file.type,
+        uuid: fileSlug,
+        partOne: idArrayPart1,
+        partTwo: idArrayPart2,
       });
+      this.setState({ isUploading: false, current: 0, total: 0 });
     }
   }
 

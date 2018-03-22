@@ -23,6 +23,37 @@ class Files extends Component {
     }, 1000);
   }
 
+  downloadFile = file => {
+    // const fileArray = [];
+
+    console.log(file);
+    for (let user in this.props.users) {
+      if (file.partOne.includes(this.props.users[user]._id)) {
+        console.log(`download part1 from ${this.props.users[user].hostname}`);
+        // const rawRes = await fetch(`http://${this.props.users[user].ip}/files/${file.slug}.part1`)
+        // const jsonRes = await rawRes.json();
+        // if (jsonRes.body.length > 0) {
+        //   fileArray.push(jsonRes.body);
+        //}
+        // break;
+      }
+    }
+
+    for (let user in this.props.users) {
+      if (file.partOne.includes(this.props.users[user]._id)) {
+        console.log(`download part2 from ${this.props.users[user].hostname}`);
+        // const rawRes = await fetch(`http://${this.props.users[user].ip}/files/${file.slug}.part2`)
+        // const jsonRes = await rawRes.json();
+        // if (jsonRes.body.length > 0) {
+        //   fileArray.push(jsonRes.body);
+        //}
+        // breal;
+      }
+    }
+
+    // create file and download
+  }
+
   render() {
     return (
       <div className='FilesContainer'>
@@ -34,9 +65,8 @@ class Files extends Component {
             {this.props.files.map((file) => (
               <FileItem
                 key={file._id}
-                type={file.type}
-                name={file.name}
-                size={file.size}
+                file={file}
+                onDownload={this.downloadFile}
               />
             ))}
           </TableBody>
