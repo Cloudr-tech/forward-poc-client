@@ -33,6 +33,8 @@ class Storage extends Component {
 
   getPercentUsage = () => {
     const percent = Math.round((this.state.totalUsedStorage / this.state.totalAvailableStorage) * 100);
+    if (percent === Infinity)
+      return 0;
     return percent || 0;
   }
 

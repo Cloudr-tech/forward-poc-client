@@ -107,7 +107,7 @@ class Upload extends Component {
         name: this.file.name,
         size: this.file.size,
         type: this.file.type,
-        uuid: fileSlug,
+        uid: fileSlug,
         partOne: idArrayPart1,
         partTwo: idArrayPart2,
       });

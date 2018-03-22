@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import FileItem from '../../components/FileItem';
 import {
   Table,
@@ -23,35 +24,39 @@ class Files extends Component {
     }, 1000);
   }
 
-  downloadFile = file => {
-    // const fileArray = [];
+  downloadFile = async file => {
+    let fileArray = [];
 
-    console.log(file);
     for (let user in this.props.users) {
       if (file.partOne.includes(this.props.users[user]._id)) {
-        console.log(`download part1 from ${this.props.users[user].hostname}`);
-        // const rawRes = await fetch(`http://${this.props.users[user].ip}/files/${file.slug}.part1`)
-        // const jsonRes = await rawRes.json();
-        // if (jsonRes.body.length > 0) {
-        //   fileArray.push(jsonRes.body);
-        //}
-        // break;
+        const res = await Axios(`http://${this.props.users[user].ip}:4242/download/${file.uid}.part1`);
+        fileArray = res.data.data;
+        console.log(fileArray);
       }
     }
 
     for (let user in this.props.users) {
-      if (file.partOne.includes(this.props.users[user]._id)) {
-        console.log(`download part2 from ${this.props.users[user].hostname}`);
-        // const rawRes = await fetch(`http://${this.props.users[user].ip}/files/${file.slug}.part2`)
-        // const jsonRes = await rawRes.json();
-        // if (jsonRes.body.length > 0) {
-        //   fileArray.push(jsonRes.body);
-        //}
-        // breal;
+      if (file.partTwo.includes(this.props.users[user]._id)) {
+        const res = await Axios(`http://${this.props.users[user].ip}:4242/download/${file.uid}.part2`);
+        fileArray = fileArray.concat(res.data.data);
       }
     }
 
-    // create file and download
+    const arrayBuff = new Int8Array(fileArray);
+    const blob = new Blob([arrayBuff], { type: file.type });
+    var blobURL = window.URL.createObjectURL(blob);
+    var tempLink = document.createElement('a');
+    tempLink.style.display = 'none';
+    tempLink.href = blobURL;
+    tempLink.setAttribute('download', file.name);
+    if (typeof tempLink.download === 'undefined') {
+       tempLink.setAttribute('target', '_blank');
+    }
+
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    document.body.removeChild(tempLink);
+    window.URL.revokeObjectURL(blobURL);
   }
 
   render() {
