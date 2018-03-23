@@ -31,10 +31,10 @@ class Sidebar extends Component {
             />
           </div>
           <h1 className="SidebarTitle">CloudR</h1>
-          <h4 className='SidebarSlogan'>Soyez votre propre hébergeur!</h4>
+          <h4 className='SidebarSlogan'>Rentabilisez vos ressources informatiques !</h4>
           <hr />
           <div className='SidebarDescription'>
-          CloudR est un service permettant de louer à des particuliers et/ou à des professionnels des ressources informatique.<br/><br/>Ces ressources seront mises à disposition par ces derniers.
+          CloudR est un service permettant de louer à des particuliers et/ou à des professionnels des ressources informatiques.<br/><br/>Ces ressources seront mises à disposition par ces derniers.
           </div>
           <div className='SidebarSocialIcon'>
             <p>Suivez nous sur nos réseaux sociaux!</p>
